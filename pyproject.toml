@@ -17,10 +17,12 @@ python-dotenv = "^1.1.1"
 pillow = "^11.3.0"
 django-constance = "^4.3.2"
 python-decouple = "^3.8"
+psycopg2-binary = "^2.9.9"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pytest-django = "^4.11.1"
+django-debug-toolbar = "^4.4.2"
 
 [build-system]
 requires = ["poetry-core"]

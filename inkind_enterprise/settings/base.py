@@ -33,7 +33,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.gis",  # For PostGIS
+    # "django.contrib.gis",  # For PostGIS
 ]
 THIRD_PARTY_APPS = [
     "storages",  # For S3 file storage
@@ -46,7 +46,7 @@ LOCAL_APPS = [
     "apps.inventory",
     "apps.needs",
 ]
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 # MIDDLEWARE
 # ------------------------------------------------------------------------------
@@ -79,6 +79,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.i18n",
             ],
         },
     },
@@ -128,4 +129,4 @@ MEDIA_ROOT = str(APPS_DIR / "media")
 # DEFAULTS
 # ------------------------------------------------------------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-AUTH_USER_MODEL = "users.User"
+# AUTH_USER_MODEL = "users.User"

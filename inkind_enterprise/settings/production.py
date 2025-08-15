@@ -7,6 +7,9 @@ DEBUG = False
 # This should be your domain name(s), e.g., ["inkind.at", "api.inkind.at"]
 ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
 
+# Application definition
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 # DATABASES
 # ------------------------------------------------------------------------------
 # This will read from environment variables provided by AWS SSM Parameter Store

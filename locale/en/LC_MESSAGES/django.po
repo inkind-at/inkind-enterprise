@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-15 10:56+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\templates\landing.html:4
+msgid "Welcome to in-kind enterprise"
+msgstr ""
+
+#: .\templates\landing.html:8
+msgid "in-kind enterprise"
+msgstr ""
+
+#: .\templates\landing.html:10
+msgid ""
+"Connecting social enterprises with donors to fulfill needs and create impact."
+msgstr ""
+
+#: .\templates\landing.html:12
+msgid "Register Your Enterprise"
+msgstr ""
+
+#: .\templates\landing.html:13
+msgid "View Needs"
+msgstr ""
+
+#: .\templates\legal\impressum.html:4 .\templates\legal\impressum.html:8
+#: .\templates\partials\footer.html:10
+msgid "Impressum"
+msgstr ""
+
+#: .\templates\legal\impressum.html:9
+msgid "This is the impressum page."
+msgstr ""
+
+#: .\templates\legal\privacy.html:4 .\templates\legal\privacy.html:8
+#: .\templates\partials\footer.html:11
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\templates\legal\privacy.html:9
+msgid "This is the privacy policy page."
+msgstr ""
+
+#: .\templates\legal\terms.html:4 .\templates\legal\terms.html:8
+#: .\templates\partials\footer.html:12
+msgid "Terms & Conditions"
+msgstr ""
+
+#: .\templates\legal\terms.html:9
+msgid "This is the terms & conditions page."
+msgstr ""
+
+#: .\templates\partials\footer.html:8
+msgid "Legal"
+msgstr ""
+
+#: .\templates\placeholder.html:4 .\templates\placeholder.html:8
+msgid "Feature Coming Soon"
+msgstr ""
+
+#: .\templates\placeholder.html:9
+msgid "This feature is currently under development. Please check back later."
+msgstr ""
