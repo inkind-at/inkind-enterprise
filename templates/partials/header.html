@@ -1,0 +1,29 @@
+{% load static i18n %}
+<header class="p-3 mb-3 border-bottom">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img src="{% static 'images/logo.svg' %}" alt="in-kind enterprise logo" width="40" height="32">
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                {% get_current_language as LANGUAGE_CODE %}
+                <form action="{% url 'set_language' %}" method="post" class="form-inline">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                    <select name="language" onchange="this.form.submit()">
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang_code, lang_name in LANGUAGES %}
+                            <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                                {{ lang_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </form>
+        </div>
+    </div>
+</header>
