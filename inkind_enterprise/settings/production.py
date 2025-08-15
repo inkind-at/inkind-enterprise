@@ -15,7 +15,8 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # This will read from environment variables provided by AWS SSM Parameter Store
 DATABASES = {
     "default": {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "ENGINE": "django.db.backends.postgresql",
+        # "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": config("RDS_DB_NAME"),
         "USER": config("RDS_USERNAME"),
         "PASSWORD": config("RDS_PASSWORD"),
@@ -52,4 +53,6 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", default=True, cast=bool)
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ['https://enterprise.inkind.at', 'http://enterprise.inkind.at']
+
 
