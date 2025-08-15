@@ -18,10 +18,10 @@ if any(cmd in sys.argv for cmd in ["makemessages", "collectstatic"]):
         }
     }
 else:
-    # Make sure PostgreSQL with PostGIS is installed and running locally.
+    # Make sure PostgreSQL is installed and running locally.
     DATABASES = {
         "default": {
-            "ENGINE": "django.contrib.gis.db.backends.postgis",
+            "ENGINE": "django.db.backends.postgresql",
             "NAME": config("POSTGRES_DB"),
             "USER": config("POSTGRES_USER"),
             "PASSWORD": config("POSTGRES_PASSWORD"),
@@ -34,6 +34,7 @@ else:
 # ------------------------------------------------------------------------------
 # Add django-debug-toolbar for local development
 # Application definition
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + ["debug_toolbar"]
-MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+# INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + ["debug_toolbar"]
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+# MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 INTERNAL_IPS = ["127.0.0.1"]

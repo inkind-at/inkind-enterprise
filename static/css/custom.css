@@ -1,5 +1,39 @@
 :root {
     --primary-color: #7A003D;
+    --primary-color-darker: #6a0035;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.site-header {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.site-header a,
+.site-header a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.site-header .form-select {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .site-header .form-select {
+        width: auto;
+        font-size: 0.875rem;
+    }
+
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
 }
 
 .btn-primary {
@@ -8,10 +42,16 @@
 }
 
 .btn-primary:hover {
-    background-color: #6a0035;
-    border-color: #6a0035;
+    background-color: var(--primary-color-darker);
+    border-color: var(--primary-color-darker);
 }
 
 a {
     color: var(--primary-color);
+}
+
+.site-logo {
+    width: 40px;
+    height: 32px;
+    fill: currentColor;
 }

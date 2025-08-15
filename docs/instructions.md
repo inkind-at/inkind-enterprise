@@ -1,123 +1,124 @@
-# Implementation Instructions — Public Landing Page (1.5) & Legal Pages (9)
+# Implementation Instructions — User Management (Registration, Login, Logout, Profile)
 
 ## 1. Technical Context
-- Consider existing folder structure in the repo
 - **Backend:** Python/Django (REST API)
-- **Frontend:** Bootstrap 5 (mobile-first), custom.css, favicon (already provided)
-- **Database:** PostgreSQL in local development, AWS RDS in production
+- **Frontend:** Bootstrap 5 (mobile-first), custom.css, favicon
+- **Database:** PostgreSQL (with PostGIS support in the future)
 - **Internationalization:** English (default) & German
 - **Branding:** Primary color Burgundy (#7A003D)
-- **Responsiveness:** Mobile-first approach
+- **Roles:** Enterprise Admin, Superuser (Django default)
 
 ---
 
-## 2. Public Landing Page (NFR 1.5)
+## 2. Features to Implement
 
-### 2.1 File Structure
-- **Template:** `templates/landing.html`
-- **CSS:** Extend `custom.css` (already available)
-- **View:** `views.py` → `LandingPageView`
-- **URL:** `/` (root URL)
-
-### 2.2 Content Requirements
-- Communicate platform's mission & value proposition (English/German)
-- Two primary CTAs:
-  - **For Social Enterprises:** "Register Your Enterprise" / "Learn More"
-  - **For Donors:** "View Needs" / "How to Donate"
-- Add **Painted Door Testing:** when clicking the buttons, "painted door" stubs shall be used. These stubs will lead to a placeholder page.
-- Branding compliance:
-  - Use Burgundy (#7A003D) for primary buttons and highlights
-  - Display logo in header
-  - Include provided favicon in `<head>`
-
-### 2.3 Usability & Accessibility (NFR 1.1–1.3)
-- **Responsive design** via Bootstrap grid
-- **Touch-friendly elements:** Buttons & links ≥ 48x48px
-- **ARIA labels** for all interactive elements
-- **WCAG 2.1 AA** contrast compliance
-- All images must have `alt` text
-
-### 2.4 Internationalization
-- Use Django `i18n` tags in templates
-- Translations:
-  - English strings in `locale/en/LC_MESSAGES/django.po`
-  - German strings in `locale/de/LC_MESSAGES/django.po`
-- Include language switcher in navbar
+### 2.1 User Registration
+- **URL:** `/register/`
+- **Allowed Roles:** Enterprise Admin (Superuser created via `createsuperuser`)
+- **Form Fields:**
+  - Email (unique)
+  - First name
+  - Last name
+  - Password & password confirmation
+  - Checkbox to accept Terms & Conditions (`/terms`)
+  - Checkbox to acknowledge Privacy Policy (`/privacy`)
+- **Business Rules:**
+  - Passwords stored securely using Argon2 (NFR 3.1)
+  - Email verification step before activation (optional for MVP)
+  - Users default to Enterprise Admin role unless created as Superuser in admin panel
+- **NFR Compliance:**
+  - Mobile-first design (NFR 1.1)
+  - Accessible form fields with ARIA labels (NFR 1.3.2)
+  - Clear error messages in plain language (NFR 1.2.6)
+  - Language switch support (NFR 6.1–6.3)
 
 ---
 
-## 3. Legal Pages (NFR 9.1 – 9.3)
-
-### 3.1 Pages to Create
-- **Impressum** (`/impressum`) – NFR 9.1
-- **Privacy Policy** (`/privacy`) – NFR 9.2
-- **Terms & Conditions** (`/terms`) – NFR 9.3
-
-### 3.2 Implementation Details
-- Templates:
-  - `templates/legal/impressum.html`
-  - `templates/legal/privacy.html`
-  - `templates/legal/terms.html`
-- Views:
-  - `ImpressumView`
-  - `PrivacyPolicyView`
-  - `TermsView`
-- Static text content for both English & German via Django i18n
-- Footer links to each page on **every template** (including landing page)
-
-### 3.3 Registration Integration
-- Modify registration form:
-  - Checkbox for "I agree to the Terms & Conditions" (link to `/terms`)
-  - Checkbox for "I have read the Privacy Policy" (link to `/privacy`)
+### 2.2 User Login
+- **URL:** `/login/`
+- **Fields:** Email, password
+- **Logic:**
+  - Use Django `authenticate` & `login` functions
+  - Lock account for 15 minutes after 5 failed attempts (NFR 3.3)
+  - Enforce HTTPS (NFR 3.4)
+- **UI/UX:**
+  - Show platform logo (NFR 1.2.2)
+  - Responsive layout with large tap targets (NFR 1.1.3)
 
 ---
 
-## 4. Footer Structure
-- Place footer in `templates/partials/footer.html`
-- Include:
-  - Links: Impressum, Privacy Policy, Terms
-  - Language switcher
-  - All links available in both languages
+### 2.3 User Logout
+- **URL:** `/logout/`
+- **Logic:** Call Django’s `logout()` and redirect to landing page
+- **UI:** Logout button in navbar (visible only when authenticated)
 
 ---
 
-## 5. Internationalization Setup
-- Enable `LocaleMiddleware` in `settings.py`
-- Add `LANGUAGES = [('en', 'English'), ('de', 'Deutsch')]`
-- Generate and compile message files:
-  ```bash
-  django-admin makemessages -l en
-  django-admin makemessages -l de
-  django-admin compilemessages
+### 2.4 Profile Management
+- **URL:** `/profile/`
+- **Features:**
+  - View profile info: email, first/last name, role
+  - Edit profile info (except role)
+  - Change password
+- **UI/UX:**
+  - WCAG-compliant colors & contrast (NFR 1.3.1)
+  - Use Bootstrap forms styled via `custom.css`
+  - Accessible form labels and ARIA attributes
+- **Security:**
+  - Only logged-in users can access
+  - CSRF protection on all POST requests (NFR 3.2)
 
+---
 
-##  6. Example URL Config (urls.py)
+## 3. Role Handling
+- **Enterprise Admin:** Can manage their own profile, access enterprise-related views
+- **Superuser:** Full system access (Django admin)
+- **Implementation:**
+  - Use Django’s `is_superuser` for superuser checks
+  - Use a custom `role` field or Django Groups for Enterprise Admin
+
+---
+
+## 4. Internationalization
+- Use `{% trans %}` tags for all UI text in templates
+- Maintain translations in:
+  - `locale/en/LC_MESSAGES/django.po`
+  - `locale/de/LC_MESSAGES/django.po`
+- Add language switcher to navbar (visible on all user-facing pages)
+
+---
+
+## 5. URL Configuration Example (`urls.py`)
 ```python
 from django.urls import path
-from .views import LandingPageView, ImpressumView, PrivacyPolicyView, TermsView
+from .views import RegisterView, LoginView, LogoutView, ProfileView
 
 urlpatterns = [
-    path('', LandingPageView.as_view(), name='landing'),
-    path('impressum/', ImpressumView.as_view(), name='impressum'),
-    path('privacy/', PrivacyPolicyView.as_view(), name='privacy'),
-    path('terms/', TermsView.as_view(), name='terms'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('profile/', ProfileView.as_view(), name='profile'),
 ]
 ```
 
-## 7. Styling Guidelines
+## 6. Security Considerations
 
-* Use `custom.css` for: 
-    * Overriding Bootstrap defaults with Burgundy primary color
-    * Adjusting typography for readability
-* Ensure favicon is linked in base.html:
-<link rel="icon" href="{% static 'images/favicon.ico' %}">
+* Use Argon2 for password hashing:
+```python
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+]
+```
+* Use CSRF tokens in all forms
+* Enforce HTTPS in production
+* Add login throttling using `django-axes` or custom middleware
 
-## 8. Acceptance Criteria
+## 7. Acceptance Criteria
 
-* Landing page visible without authentication
-* Two primary CTAs per NFR 1.5.3
-* All legal pages accessible from footer in all templates
-* Responsive & mobile-first
-* Accessible (ARIA, contrast, alt-text)
-* English/German switch works correctly
-* Branding & favicon applied
+* User can register as Enterprise Admin and log in
+* Superuser can log in and access Django admin
+* Account lockout after 5 failed attempts works
+* User can view & edit their profile
+* All forms are mobile-first, accessible, and translated
+* Terms & Privacy checkboxes are required on registration
+* Logout redirects to landing page
