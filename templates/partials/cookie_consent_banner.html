@@ -1,0 +1,8 @@
+{% load i18n %}
+<div id="cookie-consent-banner" class="cookie-consent-banner" style="display: none;">
+    <p>
+        {% trans "We use cookies to ensure you get the best experience on our website." %}
+        <a href="{% url 'privacy' %}">{% trans "Learn more" %}</a>
+    </p>
+    <button id="cookie-consent-accept" class="btn btn-primary">{% trans "Accept" %}</button>
+</div>
