@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Welcome to in-kind enterprise" %}{% endblock %}
+{% block title %}{% trans "Welcome to in-kind" %}{% endblock %}
 
 {% block content %}
 <div class="px-4 py-5 my-5 text-center">
-    <h1 class="display-5 fw-bold">{% trans "in-kind enterprise" %}</h1>
+    <h1 class="display-5 fw-bold">{% trans "Welcome to in-kind" %}</h1>
     <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">{% trans "Connecting social enterprises with donors to fulfill needs and create impact." %}</p>
+        <p class="lead mb-4">{% trans "A seamless solution for managing in-kind donations." %}</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <a href="{% url 'placeholder' %}" class="btn btn-primary btn-lg px-4 gap-3" role="button" aria-label="Register Your Enterprise">{% trans "Register Your Enterprise" %}</a>
             <a href="{% url 'placeholder' %}" class="btn btn-outline-secondary btn-lg px-4" role="button" aria-label="View Needs">{% trans "View Needs" %}</a>

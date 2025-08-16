@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 :root {
     --primary-color: #7A003D;
     --primary-color-darker: #6a0035;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 }
 
 .site-header {
@@ -19,16 +21,17 @@ body {
 }
 
 .site-header .form-select {
-    background-color: var(--primary-color);
-    color: #fff;
-    border-color: #fff;
+    background-color: #fff;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-family: 'Roboto', "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 }
 
 @media (max-width: 768px) {
-    .site-header .form-select {
+    /* .site-header .form-select {
         width: auto;
         font-size: 0.875rem;
-    }
+    } */
 
     .btn-lg {
         font-size: 1rem;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-15 10:56+0200\n"
+"POT-Creation-Date: 2025-08-16 09:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,62 +17,70 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\templates\landing.html:4
-msgid "Welcome to in-kind enterprise"
-msgstr ""
 
-#: .\templates\landing.html:8
-msgid "in-kind enterprise"
-msgstr ""
+#: .\templates\landing.html:4 .\templates\landing.html:8
+msgid "Welcome to in-kind"
+msgstr "Willkommen bei in-kind"
 
 #: .\templates\landing.html:10
-msgid ""
-"Connecting social enterprises with donors to fulfill needs and create impact."
-msgstr ""
+msgid "A seamless solution for managing in-kind donations."
+msgstr "Eine nahtlose Lösung für die Verwaltung von Sachspenden."
 
 #: .\templates\landing.html:12
 msgid "Register Your Enterprise"
-msgstr ""
+msgstr "Registrieren Sie Ihr Unternehmen"
 
 #: .\templates\landing.html:13
 msgid "View Needs"
-msgstr ""
+msgstr "Bedarfe ansehen"
 
 #: .\templates\legal\impressum.html:4 .\templates\legal\impressum.html:8
 #: .\templates\partials\footer.html:10
 msgid "Impressum"
-msgstr ""
+msgstr "Impressum"
 
 #: .\templates\legal\impressum.html:9
 msgid "This is the impressum page."
-msgstr ""
+msgstr "Dies ist die Impressums-Seite."
 
 #: .\templates\legal\privacy.html:4 .\templates\legal\privacy.html:8
 #: .\templates\partials\footer.html:11
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Datenschutz"
 
 #: .\templates\legal\privacy.html:9
 msgid "This is the privacy policy page."
-msgstr ""
+msgstr "Dies ist die Datenschutz-Seite."
 
 #: .\templates\legal\terms.html:4 .\templates\legal\terms.html:8
 #: .\templates\partials\footer.html:12
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "AGB"
 
 #: .\templates\legal\terms.html:9
 msgid "This is the terms & conditions page."
-msgstr ""
+msgstr "Dies ist die AGB-Seite."
 
 #: .\templates\partials\footer.html:8
 msgid "Legal"
-msgstr ""
+msgstr "Rechtliches"
 
 #: .\templates\placeholder.html:4 .\templates\placeholder.html:8
 msgid "Feature Coming Soon"
-msgstr ""
+msgstr "Funktion bald verfügbar"
 
 #: .\templates\placeholder.html:9
 msgid "This feature is currently under development. Please check back later."
 msgstr ""
+"Diese Funktion befindet sich derzeit in der Entwicklung. Bitte schauen Sie "
+"später wieder vorbei."
+
+#~ msgid "in-kind enterprise"
+#~ msgstr "in-kind enterprise"
+
+#~ msgid ""
+#~ "Connecting social enterprises with donors to fulfill needs and create "
+#~ "impact."
+#~ msgstr ""
+#~ "Wir verbinden Sozialunternehmen mit Spendern, um Bedürfnisse zu erfüllen "
+#~ "und Wirkung zu erzielen."

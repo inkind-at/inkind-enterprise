@@ -20,14 +20,17 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from apps.core import views
 
-urlpatterns = i18n_patterns(
+urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+
+urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', views.LandingPageView.as_view(), name='landing'),
     path('impressum/', views.ImpressumView.as_view(), name='impressum'),
     path('privacy/', views.PrivacyPolicyView.as_view(), name='privacy'),
     path('terms/', views.TermsView.as_view(), name='terms'),
     path('placeholder/', views.PlaceholderView.as_view(), name='placeholder'),
-    path('i18n/', include('django.conf.urls.i18n')),
 )
 
 # if settings.DEBUG:
