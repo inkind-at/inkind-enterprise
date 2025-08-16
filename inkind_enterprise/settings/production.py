@@ -29,8 +29,8 @@ DATABASES["default"]["CONN_MAX_AGE"] = config("CONN_MAX_AGE", default=60, cast=i
 # AWS S3 STORAGE
 # ------------------------------------------------------------------------------
 # As per DevOps requirements, static and media files are stored on S3
-AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+# AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
 AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
@@ -39,12 +39,23 @@ AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default="eu-central-1")
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 AWS_S3_FILE_OVERWRITE = False
 
+from storages.backends.s3boto3 import S3Boto3Storage
+
+class StaticStorage(S3Boto3Storage):
+    location = "static"
+    default_acl = "public-read"   # or private if you use CloudFront
+
+class MediaStorage(S3Boto3Storage):
+    location = "media"
+    default_acl = "private"
+
+
 # Static files storage (served from S3)
-STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATICFILES_STORAGE = "inkind_enterprise.settings.production.StaticStorage"
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
 
 # Media files storage (user uploads to S3)
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+DEFAULT_FILE_STORAGE = "inkind_enterprise.settings.production.MediaStorage"
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
 
 # SECURITY
