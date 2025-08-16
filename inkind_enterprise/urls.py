@@ -31,6 +31,7 @@ urlpatterns += i18n_patterns(
     path('privacy/', views.PrivacyPolicyView.as_view(), name='privacy'),
     path('terms/', views.TermsView.as_view(), name='terms'),
     path('placeholder/', views.PlaceholderView.as_view(), name='placeholder'),
+    path('', include('apps.users.urls')),
 )
 
 # if settings.DEBUG:

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "My Profile" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>{% trans "Profile Information" %}</h2>
+        <p><strong>{% trans "Role" %}:</strong> {{ user.get_role_display }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">{% trans "Update Profile" %}</button>
+        </form>
+
+        <hr class="my-4">
+
+        <h3>{% trans "Change Password" %}</h3>
+        <p>
+            <a href="{% url 'password_change' %}" class="btn btn-secondary">{% trans "Change my password" %}</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+

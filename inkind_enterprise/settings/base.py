@@ -34,6 +34,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.gis",  # For PostGIS
+    "axes" # for login throttling
 ]
 THIRD_PARTY_APPS = [
     "storages",  # For S3 file storage
@@ -59,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # django-axes middleware for login throttling
+    'axes.middleware.AxesMiddleware',
 ]
 
 # URLS
@@ -100,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # INTERNATIONALIZATION
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
@@ -129,4 +132,27 @@ MEDIA_ROOT = str(APPS_DIR / "media")
 # DEFAULTS
 # ------------------------------------------------------------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-# AUTH_USER_MODEL = "users.User"
+
+# --- Custom User Model ---
+AUTH_USER_MODEL = 'users.CustomUser'
+
+# --- Password Hashers (NFR 3.1) ---
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
+
+# --- Login/Logout URLs ---
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'landing' # Assuming you have a landing page view
+
+# --- django-axes configuration (NFR 3.3) ---
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 0.25 # 15 minutes
+AXES_LOCKOUT_TEMPLATE = 'axes/lockout.html' # You may need to create this template
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend', # It should be the first backend
+    'django.contrib.auth.backends.ModelBackend',
+]

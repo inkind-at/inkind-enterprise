@@ -20,6 +20,8 @@ python-decouple = "^3.8"
 psycopg2-binary = "^2.9.9"
 django-storages = {extras = ["boto3"], version = "^1.14.6"}
 boto3 = "^1.40.11"
+django-axes = "^8.0.0"
+argon2-cffi = "^25.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"

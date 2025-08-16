@@ -24,7 +24,7 @@
   - Checkbox to acknowledge Privacy Policy (`/privacy`)
 - **Business Rules:**
   - Passwords stored securely using Argon2 (NFR 3.1)
-  - Email verification step before activation (optional for MVP)
+  - Email verification step before activation
   - Users default to Enterprise Admin role unless created as Superuser in admin panel
 - **NFR Compliance:**
   - Mobile-first design (NFR 1.1)
