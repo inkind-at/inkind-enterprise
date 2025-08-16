@@ -41,6 +41,9 @@ AWS_S3_FILE_OVERWRITE = False
 
 from storages.backends.s3boto3 import S3Boto3Storage
 
+# Configure static and media storage
+# Static files storage (served from S3)
+# Media files storage (user uploads to S3)
 class StaticStorage(S3Boto3Storage):
     location = "static"
     default_acl = "public-read"   # or private if you use CloudFront
@@ -49,13 +52,16 @@ class MediaStorage(S3Boto3Storage):
     location = "media"
     default_acl = "private"
 
+STORAGES = {
+    "default": {
+        "BACKEND": "inkind_enterprise.settings.production.MediaStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "inkind_enterprise.settings.production.StaticStorage",
+    },
+}
 
-# Static files storage (served from S3)
-STATICFILES_STORAGE = "inkind_enterprise.settings.production.StaticStorage"
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
-
-# Media files storage (user uploads to S3)
-DEFAULT_FILE_STORAGE = "inkind_enterprise.settings.production.MediaStorage"
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
 
 # SECURITY
