@@ -46,11 +46,11 @@ from storages.backends.s3boto3 import S3Boto3Storage
 # Media files storage (user uploads to S3)
 class StaticStorage(S3Boto3Storage):
     location = "static"
-    default_acl = "public-read"   # or private if you use CloudFront
+    default_acl = None
 
 class MediaStorage(S3Boto3Storage):
     location = "media"
-    default_acl = "private"
+    default_acl = None
 
 STORAGES = {
     "default": {
